@@ -1,0 +1,95 @@
+
+<sp-locker-header add></sp-locker-header>
+
+<!-- Display unlock directive if locker is locked -->
+<sp-locker-unlock ng-show="locked">
+</sp-locker-unlock>
+
+
+<!-- Display add form if locker is unlocked -->
+<div ng-hide="locked">
+
+    <div class="ui attached positive message">
+        <div class="header">
+            Add a new item
+        </div>
+        <p> Fields are not required but you need to save something </p>
+    </div>
+    <form name="form"
+          class="ui form attached fluid segment"
+          ng-submit="add(newItem)"
+          novalidate>
+
+        <div class="field" ng-class="{error: form.url.$invalid}">
+            <label for="url">Url</label>
+            <input class="ui input" type="url" autofocus
+                   placeholder="Url..."
+                   name="url" id="url"
+                   ng-model="newItem.url"/>
+            <div class="ui red pointing above ui label"
+                 ng-show="form.url.$error.url">
+                Enter a valid url
+            </div>
+        </div>
+
+        <div class="two fields">
+            <div class="field">
+                <label for="name">Name</label>
+                <input class="ui input" type="text"
+                       name="name" id="name"
+                       placeholder="Name..."
+                       ng-model="newItem.name"
+                       string/>
+            </div>
+            <div class="field">
+                <label for="tags">Tags</label>
+                <input class="ui input" type="text"
+                       id="tags" name="tags"
+                       placeholder="Tags..."
+                       ng-model="newItem.tags"
+                       string/>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="login">Login</label>
+                <input class="ui input" type="text"
+                       id="login" name="login"
+                       placeholder="Login..."
+                       ng-model="newItem.login"
+                       string/>
+            </div>
+            <div class="field">
+                <label for="password">Password</label>
+                <input class="ui input" type="text"
+                       id="password" name="password"
+                       placeholder="Passwords..."
+                       ng-model="newItem.password"
+                       string/>
+            </div>
+        </div>
+        <div class="field">
+            <label>Notes</label>
+            <textarea placeholder="notes..."
+                      id="notes" name="notes"
+                      ng-model="newItem.notes">
+
+            </textarea>
+        </div>
+
+
+        <div class="ui buttons">
+            <button class="ui positive button"
+                    type="submit"
+                    ng-disabled="form.$pristine"
+                    ng-class="{disabled: form.$pristine}">
+                Save
+            </button>
+            <div class="or"></div>
+            <button ng-click="setActiveTab('content')" class="ui basic button">
+                Cancel
+            </button>
+        </div>
+    </form>
+
+</div>
