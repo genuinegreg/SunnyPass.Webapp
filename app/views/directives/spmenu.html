@@ -14,7 +14,7 @@
         <div class="menu" ng-show="lockers.length > 0">
             <a class="item"
                ng-repeat="locker in lockers"
-               ng-href="{{ '#/locker/content/' + locker.secret.shared }}"
+               ng-href="#/locker/{{ locker.secret.shared }}"
                ng-class="{active: $routeParams.sharedSecret === locker.secret.shared}">
 
                 <div class="ui label">

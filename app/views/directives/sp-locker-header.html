@@ -9,15 +9,15 @@
         </small>
     </div>
     <a class="item" ng-class="{active: active.content}"
-       ng-href="#/locker/content/{{ locker.secret.shared }}">
+       ng-href="#/locker/{{ locker.secret.shared }}">
         <i class="open folder icon"></i>
     </a>
     <a class="item" ng-class="{active: active.details}"
-       ng-href="#/locker/details/{{ locker.secret.shared }}">
+       ng-href="#/locker/{{ locker.secret.shared }}/details">
         <i class="setting icon"></i>
     </a>
     <a class="item" ng-class="{active: active.add}"
-       ng-href="#/locker/add/{{ locker.secret.shared }}">
+       ng-href="#/locker/{{ locker.secret.shared }}/add">
         <i class="icon add"></i>
         <!--New-->
     </a>

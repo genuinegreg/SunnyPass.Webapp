@@ -40,7 +40,7 @@ angular.module('SunnyPass.Webapp')
 
                 locker.save(meta, data).then(
                     function resolved() {
-                        $location.path('/locker/content/' + locker.secret.shared);
+                        $location.path('/locker/' + locker.secret.shared);
                     },
                     function rejected() {
                         window.alert('Unknown error !!!');

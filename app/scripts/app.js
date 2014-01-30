@@ -34,13 +34,6 @@ angular.module('SunnyPass.Webapp', [
                     lockers: resolve.lockers()
                 }
             })
-            .when('/locker/create', {
-                templateUrl: 'views/locker/create.html',
-                controller: 'LockerCreateCtrl',
-                resolve: {
-                    lockers: resolve.lockers()
-                }
-            })
             .when('/more', {
                 templateUrl: 'views/more.html',
                 controller: 'MoreCtrl',
@@ -48,7 +41,14 @@ angular.module('SunnyPass.Webapp', [
                     lockers: resolve.lockers()
                 }
             })
-            .when('/locker/content/:sharedSecret', {
+            .when('/locker/create', {
+                templateUrl: 'views/locker/create.html',
+                controller: 'LockerCreateCtrl',
+                resolve: {
+                    lockers: resolve.lockers()
+                }
+            })
+            .when('/locker/:sharedSecret', {
                 templateUrl: 'views/locker/content.html',
                 controller: 'LockerContentCtrl',
                 resolve: {
@@ -56,7 +56,7 @@ angular.module('SunnyPass.Webapp', [
                     lockers: resolve.lockers()
                 }
             })
-            .when('/locker/add/:sharedSecret', {
+            .when('/locker/:sharedSecret/add', {
                 templateUrl: 'views/locker/add.html',
                 controller: 'LockerAddCtrl',
                 resolve: {
@@ -64,13 +64,17 @@ angular.module('SunnyPass.Webapp', [
                     lockers: resolve.lockers()
                 }
             })
-            .when('/locker/details/:sharedSecret', {
+            .when('/locker/:sharedSecret/details', {
                 templateUrl: 'views/locker/details.html',
                 controller: 'LockerDetailsCtrl',
                 resolve: {
                     locker: resolve.locker('sharedSecret'),
                     lockers: resolve.lockers()
                 }
+            })
+            .when('/locker/:sharedSecret/item/:itemId', {
+                templateUrl: 'views/locker/item.html',
+                controller: 'LockerItemCtrl'
             })
             .otherwise({
                 redirectTo: '/'

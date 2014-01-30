@@ -58,12 +58,12 @@
     <!-- Empty locker display -->
     <div class="ui attached bottom segment" ng-hide="list.length > 0">
         <div class="ui buttons">
-            <a class="ui left labeled icon positive button" ng-href="#/locker/add/{{ locker.secret.shared }}">
+            <a class="ui left labeled icon positive button" ng-href="#/locker/{{ locker.secret.shared }}/add">
                 <i class="ui plus icon"></i>
                 Add stuff
             </a>
             <div class="or"></div>
-            <a class="ui right labeled icon blue button" ng-href="#/locker/details/{{ locker.secret.shared }}">
+            <a class="ui right labeled icon blue button" ng-href="#/locker/{{ locker.secret.shared }}/details">
                 <i class="ui setting icon"></i>
                 Configure locker
             </a>
