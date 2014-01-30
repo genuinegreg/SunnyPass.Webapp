@@ -74,7 +74,11 @@ angular.module('SunnyPass.Webapp', [
             })
             .when('/locker/:sharedSecret/item/:itemId', {
                 templateUrl: 'views/locker/item.html',
-                controller: 'LockerItemCtrl'
+                controller: 'LockerItemCtrl',
+                resolve: {
+                    locker: resolve.locker('sharedSecret'),
+                    lockers: resolve.lockers()
+                }
             })
             .otherwise({
                 redirectTo: '/'
