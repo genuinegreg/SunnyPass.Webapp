@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('SunnyPass.Controller')
+angular.module('SunnyPass.Webapp')
     .controller('LockerDetailsCtrl', function (
         lockers, locker, // resolved values
         Locker,

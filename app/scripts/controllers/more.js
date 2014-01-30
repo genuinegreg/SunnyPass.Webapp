@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('SunnyPass.Controller')
+angular.module('SunnyPass.Webapp')
     .controller('MoreCtrl', function (lockers, $scope, $log, $q, SunnyPass) {
 
 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('SunnyPass.Controller', ['SunnyPass.Service'])
+angular.module('SunnyPass.Webapp')
     .controller('MainCtrl', function (lockers, $scope) {
 
         $scope.$root.lockers = lockers;

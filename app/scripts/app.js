@@ -4,7 +4,7 @@ angular.module('SunnyPass.Webapp', [
         'ngSanitize',
         'ngRoute',
 //        'ngAnimate',
-        'SunnyPass.Controller',
+//        'SunnyPass.Controller',
         'SunnyPass.Service'
     ])
     .config(function($logProvider) {
