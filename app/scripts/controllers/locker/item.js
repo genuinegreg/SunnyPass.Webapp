@@ -16,9 +16,15 @@ angular.module('SunnyPass.Webapp')
             function resolved(item) {
                 $log.debug('resolved', item);
                 $scope.item = item;
+                $scope.locked = locker.isLocked();
             },
             function rejected(err) {
                 $log.debug('rejected', err);
+            },
+            function notified() {
+                $log.debug('route.item notified !!!');
+                $scope.locked = locker.isLocked();
+
             }
         );
 

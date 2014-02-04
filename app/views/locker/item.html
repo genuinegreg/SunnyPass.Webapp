@@ -6,15 +6,17 @@
 </sp-locker-unlock>
 
 
-<div class="ui info attached top message">
-    <div class="header">Edit item</div>
+<div ng-hide="locked">
+    <div class="ui info attached top message">
+        <div class="header">Edit item</div>
+    </div>
+
+    <sp-locker-item-form class="fluid attached bottom segment"
+                         sp-locker-item="item"
+                         sp-locker="locker"
+                         sp-cancel-url="/locker/{{ locker.secret.shared }}"
+                         sp-success-url="/locker/{{ locker.secret.shared }}"
+                         sp-lock-flag="locked">
+
+    </sp-locker-item-form>
 </div>
-
-<sp-locker-item-form class="fluid attached bottom segment"
-                     ng-hide="locked"
-                     sp-locker-item="item"
-                     sp-locker="locker"
-                     sp-cancel-url="/locker/{{ locker.secret.shared }}">
-                     sp-success-url="/locker/{{ locker.secret.shared }}">
-
-</sp-locker-item-form>

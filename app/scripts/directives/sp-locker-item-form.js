@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('SunnyPass.Webapp')
-    .directive('spLockerItemForm', function ($location) {
+    .directive('spLockerItemForm', function ($location, $log) {
         return {
             templateUrl: 'views/directives/sp-locker-item-form.html',
             restrict: 'E',
@@ -10,19 +10,19 @@ angular.module('SunnyPass.Webapp')
                 'spLocker': '&',
                 'spCancelUrl': '@',
                 'spSuccessUrl': '@',
-                'spLockNotification': '&'
+                'spLockFlag': '='
             },
             replace: true,
             controller: function($scope) {
                 // watch for parent scope item change
                 $scope.$watch('spLockerItem()', function(value) {
+                    $log.debug('spLockerItem updated', value);
                     $scope.item = angular.copy(value);
                 });
 
                 // save item
                 $scope.save = function(item) {
 
-                    console.log(item);
 
                     $scope.loading = true;
 
@@ -31,7 +31,7 @@ angular.module('SunnyPass.Webapp')
                         ).then(
                         function resolved(value) {
 
-                            console.log(value);
+                            $log.debug('resolved : item saved', value);
                             $scope.saved = true && $scope.spSuccessUrl;
 
                             if ($scope.spSuccessUrl) {
@@ -39,10 +39,11 @@ angular.module('SunnyPass.Webapp')
                             }
                         },
                         function rejected() {
-                            console.log('rejected');
+                            window.alert('Unkown error !');
                         },
                         function notified() {
-                            console.log('notified');
+                            $log.warn('notified : locker is locked');
+                            $scope.spLockFlag = true;
                         }).
                         finally(function() {
                             $scope.loading = false;

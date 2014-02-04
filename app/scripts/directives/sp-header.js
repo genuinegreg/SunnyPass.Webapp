@@ -5,7 +5,7 @@ angular.module('SunnyPass.Webapp')
         return {
             templateUrl: 'views/directives/sp-header.html',
             restrict: 'EA',
-            link: function postLink(scope, element, attrs) {
+            link: function postLink(scope) {
                 scope.version = Version;
             }
         };
