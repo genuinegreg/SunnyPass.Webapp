@@ -10,7 +10,7 @@ angular.module('SunnyPass.Webapp')
         $scope.locker = locker;
         $scope.locked = locker.isLocked();
 
-        console.log('locker metadata', locker.metadata);
+        $log.debug('locker metadata', locker.metadata);
         $scope.metadataModel = angular.copy(locker.metadata);
 
         $scope.saveMetadata = function(meta) {

@@ -38,7 +38,7 @@ angular.module('SunnyPass.Webapp')
 
         $scope.deleteItem = function(item) {
 
-            console.log('delete :', item._id);
+            $log.debug('delete :', item._id);
             $scope.locker.deleteById(item._id).then(function success() {
                 $scope.refreshItems();
             });

@@ -9,7 +9,7 @@ angular.module('SunnyPass.Webapp')
         $scope.locker = locker;
         $scope.locked = locker.isLocked();
 
-        console.log('locker', $scope.locker);
+        $log.debug('locker', $scope.locker);
 
 
         locker.get($routeParams.itemId).then(
