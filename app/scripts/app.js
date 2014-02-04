@@ -5,7 +5,7 @@ angular.module('SunnyPass.Webapp', [
         'ngRoute',
 //        'ngAnimate',
 //        'SunnyPass.Controller',
-        'SunnyPass.Service'
+        'SunnyPass.Services'
     ])
     .config(function($logProvider) {
         $logProvider.debugEnabled(true);
