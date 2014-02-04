@@ -1,32 +1,81 @@
-<header>
-    <h1><a href="/"><i class="glyphicon glyphicon-lock"></i> sunyPass </a></h1>
-</header>
+<form name="form" novalidate class="ui form segment" ng-class="{error:form.$invalid && form.$dirty}">
 
-<div class="panel panel-default">
-    <div class="panel-heading">Create a new locker</div>
-    <div class="panel-body">
-        <form>
-            <div class="form-group">
-                <label for="lockerSecret">Locker secret <button class="btn btn-link btn-default" ng-click="generate()" type="button">Generate a random secret !</button></label>
-                <input type="text" id="lockerSecret" ng-change="change()" ng-model="secret" class="form-control" required />
-                <span class="help-block">
-                    Secret is use to identify your locker. You need to remember this secret if you want to access your
-                    locker on another device. <br/>
-                    <strong>Tips: </strong> you can add some text to a generated secret in order to remember what is in
-                    the locker
-                </span>
+    <h3 class="header">Create a new Locker </h3>
+
+    <div class="field" ng-class="{error:form.key.$invalid && form.key.$dirty}">
+        <label>Locker private secret, you can use your own or use the generate button </label>
+        <div class="ui left labeled icon input">
+            <input type="text"
+                   placeholder="Private secret"
+                   name="key" ng-model="key"
+                   required ng-minlength="32" ng-pattern="/^[\w]*$/"
+                   style="font-family: mono"/>
+            <i class="hide icon"></i>
+            <div class="ui corner label">
+                <i class="icon asterisk"></i>
             </div>
-            <div class="form-group">
-                <label for="lockerPwd1">Locker master password</label>
-                <input type="password" required ng-model="password1" class="form-control" id="lockerPwd1" placeholder="password">
-            </div>
-            <div class="form-group">
-                <input type="password" required ng-model="password2" class="form-control" id="lockerPwd2" placeholder="password check">
-                <span class="help-block">
-                    You will need you master password in order to decrypt the content of your locker
-                </span>
-            </div>
-            <button type="submit" ng-click="create()" class="btn btn-success btn-block">Create</button>
-        </form>
+        </div>
     </div>
-</div>
+    <div class="field" ng-class="{error:form.name.$invalid && form.name.$dirty}">
+        <label>Locker name</label>
+        <div class="ui left labeled icon input">
+            <input type="text"
+                   placeholder="Name"
+                   name="name" ng-model="name"
+                   ng-minlength="4" string>
+            <i class="hand up icon"></i>
+        </div>
+    </div>
+    <div class="field" ng-class="{error:form.password1.$invalid && form.password1.$dirty}">
+        <label>Locker password</label>
+        <div class="ui left labeled icon input">
+            <input type="password"
+                   placeholder="Password"
+                   name="password1" ng-model="password1"
+                   required ng-minlength="6" string>
+            <i class="lock icon"></i>
+            <div class="ui corner label">
+                <i class="icon asterisk"></i>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="ui error message">
+        <ul class="list">
+            <li ng-show="form.key.$invalid">Private Secret
+                <ul class="list">
+                    <li ng-show="form.key.$error.required">is required</li>
+                    <li ng-show="form.key.$error.pattern">has to be composed of word characters</li>
+                    <li ng-show="form.key.$error.minlength">has to be at least 32 characters long</li>
+                </ul></li>
+            <li ng-show="form.name.$invalid">Name
+                <ul class="list">
+                    <li ng-show="form.name.$error.minlength">has to be at least 4 characters long</li>
+                </ul></li>
+            <li ng-show="form.password1.$invalid">Password
+                <ul class="list">
+                    <li ng-show="form.password1.$error.required">is required</li>
+                    <li ng-show="form.password1.$error.minlength">has to be at least 6 characters long</li>
+                </ul></li>
+
+        </ul>
+    </div>
+
+
+    <button type="button" class="ui secondary teal labeled icon button" ng-click="generate()">
+        <i class="magic icon"></i>
+        Generate random Secret
+    </button>
+    <div class="ui primary buttons">
+        <button type="submit" ng-click="create()"
+                class="ui positive submit button"
+                ng-disabled="form.$invalid"
+                ng-class="{disabled:form.$invalid}">
+            Create
+        </button>
+        <div class="or"></div>
+        <a href="#/" class="ui negative submit button">cancel</a>
+
+    </div>
+</form>

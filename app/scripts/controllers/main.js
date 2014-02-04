@@ -1,45 +1,45 @@
 'use strict';
 
-angular.module('webappApp')
-    .controller('MainCtrl', function ($scope, Lockers) {
+angular.module('SunnyPass.Webapp')
+    .controller('MainCtrl', function (lockers, $scope) {
 
-        var _this = this;
+        $scope.$root.lockers = lockers;
 
-        $scope.lockerName = 'test';
+//        $scope.refresh = function() {
+//
+//            var results = [];
+//
+//            var list = SunnyPass.list();
+//
+//            for (var sharedKey in list) {
+//
+//                var secretKey = list[sharedKey];
+//                var secretKeyDisplay
+//                    = secretKey.substring(0,4) +
+//                    new Array(secretKey.length-7).join('#') +
+//                    secretKey.substring(secretKey.length-4);
+//
+//                results.push(
+//                    {
+//                        sharedKey: sharedKey,
+//                        secretKey: secretKey,
+//                        secretKeyDisplay: secretKeyDisplay
+//                    }
+//                );
+//            }
+//
+////            if (results.length < 1) {
+////                $location.path('/locker/create');
+////                return;
+////            }
+////            if (results.length === 1) {
+////                $location.path('/locker/get/' + results[0].sharedKey);
+////                return;
+////            }
+//
+//            $scope.lockers = results;
+//
+//        };
 
-        $scope.generate = function() {
-            _this.secret = Lockers.generateSecret($scope.lockerName);
-            console.log(_this.secret.secret);
-            $scope.secretHex = _this.secret.secret;
-        };
-
-        $scope.create = function() {
-
-            if (!_this.secret) {
-                console.err('Error');
-            }
-
-            Lockers.create(_this.secret);
-        };
-
-        $scope.refresh = function() {
-            Lockers.list(function(err, lockers) {
-                if(err) {
-                    console.err('Error');
-                }
-
-                console.log(lockers);
-                $scope.lockers = lockers;
-                $scope.$digest();
-            });
-        };
-
-        $scope.destroy = function() {
-            Lockers.destroy();
-        };
-
-
-
-        $scope.generate();
-        $scope.refresh();
+//        $scope.refresh();
     });

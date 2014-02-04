@@ -1,0 +1,38 @@
+<div class="ui pointing menu">
+    <div class="header item">
+        <span ng-hide="locker.metadata.name">Unnamed locker</span>
+        <span ng-show="locker.metadata.name"> {{ locker.metadata.name }}</span>
+        <small>
+            <code>
+                [{{ locker.secret.key.substring(0,4) }}...{{ locker.secret.key.substring(locker.secret.key.length-4,locker.secret.key.length) }}]
+            </code>
+        </small>
+    </div>
+    <a class="item" ng-class="{active: active.content}"
+       ng-href="#/locker/{{ locker.secret.shared }}">
+        <i class="open folder icon"></i>
+    </a>
+    <a class="item" ng-class="{active: active.details}"
+       ng-href="#/locker/{{ locker.secret.shared }}/details">
+        <i class="setting icon"></i>
+    </a>
+    <a class="item" ng-class="{active: active.add}"
+       ng-href="#/locker/{{ locker.secret.shared }}/add">
+        <i class="icon add"></i>
+        <!--New-->
+    </a>
+    <div class="right menu">
+        <a class="ui item">
+            <div class="ui icon black button" ng-click="lock()">
+                <i class="icon lock"></i>
+                Lock
+            </div>
+        </a>
+        <a class="ui item">
+            <div class="ui icon negative button">
+                <i class="icon trash"></i>
+                Wipe
+            </div>
+        </a>
+    </div>
+</div>

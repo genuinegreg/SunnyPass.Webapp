@@ -1,0 +1,43 @@
+
+html {
+    font-family: sans-serif;
+}
+
+
+.ng-hide-add, .ng-hide-remove {
+    transition:0.5s linear all;
+    display:block!important;
+}
+
+.animated-switch-container {
+    position:relative;
+    overflow:hidden;
+}
+
+html {
+    /* always display scroll bar*/
+    min-height: 100.1%;
+}
+
+/*.animated-switch {*/
+/*}*/
+
+/*.animated-switch.ng-animate {*/
+    /*-webkit-transition:all 0.5s;*/
+    /*transition:all 0.5s;*/
+
+    /*position:absolute;*/
+    /*top:0;*/
+    /*left:0;*/
+    /*right:0;*/
+    /*bottom:0;*/
+/*}*/
+
+/*.animated-switch.ng-leave.ng-leave-active,*/
+/*.animated-switch.ng-enter {*/
+    /*opacity: 0;*/
+/*}*/
+/*.animated-switch.ng-leave,*/
+/*.animated-switch.ng-enter.ng-enter-active {*/
+    /*opacity: 1;*/
+/*}*/

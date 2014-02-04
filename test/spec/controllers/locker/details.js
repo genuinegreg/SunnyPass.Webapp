@@ -1,19 +1,19 @@
-//FIXME: write controller main.js tests
+//FIXME: write controller locker/details.js tests
 
 'use strict';
 
-xdescribe('Controller: MainCtrl', function () {
+xdescribe('Controller: LockerDetailsCtrl', function () {
 
     // load the controller's module
-    beforeEach(module('SunnyPass.Webapp'));
+    beforeEach(module('sunnyPasswebappApp'));
 
-    var MainCtrl,
+    var LockerDetailsCtrl,
         scope;
 
     // Initialize the controller and a mock scope
     beforeEach(inject(function ($controller, $rootScope) {
         scope = $rootScope.$new();
-        MainCtrl = $controller('MainCtrl', {
+        LockerDetailsCtrl = $controller('LockerDetailsCtrl', {
             $scope: scope
         });
     }));

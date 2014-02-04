@@ -1,0 +1,69 @@
+
+<sp-locker-header content></sp-locker-header>
+
+<!-- Display unlock directive if locker is locked -->
+<sp-locker-unlock ng-show="locked">
+</sp-locker-unlock>
+
+
+<!-- Display locker content if locker is unlocked -->
+<div ng-hide="locked">
+    <div class="ui attached message" ng-class="{info: list.length <= 0}">
+        <div class="header">
+            Locker content
+        </div>
+        <p ng-cloak ng-hide="list.length > 0">This locker is empty</p>
+        <!--<p ng-show="locker.metadata.description">{{ locker.metadata.description }}</p>-->
+    </div>
+    <!-- Locker content -->
+    <div ng-show="list.length > 0" sp-locker="locker">
+        <div class="ui attached segment" ng-repeat="item in list | filter:{meta: $root.searchInput} | orderBy:['meta.name', 'meta.updated']">
+            <div class="ui ribbon label" ng-class="{teal: item.meta.name, black: !item.meta.name && item.meta.url}">
+                {{ item.meta.name || item.meta.url || 'Un-named'}}
+                <i class="ui tags icon" ng-show="item.meta.tags.length > 0"></i>
+            </div>
+
+            <!-- item details link-->
+            <a class="ui right floated teal mini labeled icon button" ng-href="#/locker/{{ locker.secret.shared }}/item/{{ item._id }}"><i class="right arrow icon"></i>show</a>
+
+            <!-- delete item action -->
+            <div class="ui right floated mini negative icon button" ng-click="deleteItem(item)"><i class="trash icon"></i></div>
+
+            <!-- copy data action -->
+            <div class="ui right floated mini basic labeled icon button" ng-show="item.meta.password"><i class="copy icon"></i>password</div>
+            <div class="ui right floated mini basic labeled icon button" ng-show="item.meta.login"><i class="copy icon"></i>login</div>
+            <div class="ui right floated mini basic labeled icon button" ng-show="item.meta.note"><i class="copy icon"></i>notes</div>
+
+
+            <!-- meta display -->
+            <br/>
+            <div class="ui horizontal divided tiny list">
+                <div class="item"><i class="ui calendar icon"></i>{{ item.meta.updated | date:'EEE d MMM y, H:mm' }}</div>
+                <div class="item" ng-show="item.meta.tags.length > 0"><i class="ui tags icon"></i>{{ item.meta.tags.length }}</div>
+                <div class="item" ng-show="item.meta.login"><i class="ui user alternate icon"></i></div>
+                <div class="item" ng-show="item.meta.password"><i class="ui key icon"></i></div>
+                <div class="item" ng-show="item.meta.notes"><i class="ui text file outline icon"></i></div>
+
+            </div>
+        </div>
+        <div class="ui attached bottom info message">
+            <div class="ui label"><strong>{{ list.length }} items</strong></div>
+        </div>
+    </div>
+    <!-- Empty locker display -->
+    <div class="ui attached bottom segment" ng-hide="list.length > 0">
+        <div class="ui buttons">
+            <a class="ui left labeled icon positive button" ng-href="#/locker/{{ locker.secret.shared }}/add">
+                <i class="ui plus icon"></i>
+                Add stuff
+            </a>
+            <div class="or"></div>
+            <a class="ui right labeled icon blue button" ng-href="#/locker/{{ locker.secret.shared }}/details">
+                <i class="ui setting icon"></i>
+                Configure locker
+            </a>
+        </div>
+    </div>
+
+
+</div>

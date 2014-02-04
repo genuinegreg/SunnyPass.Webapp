@@ -1,0 +1,66 @@
+
+<sp-locker-header details></sp-locker-header>
+
+<!-- Display unlock directive if locker is locked -->
+<sp-locker-unlock ng-show="locked">
+</sp-locker-unlock>
+
+
+<!-- Display add form if locker is unlocked -->
+<div ng-hide="locked">
+
+    <div class="ui attached info message">
+        <div class="header">
+            Locker details
+        </div>
+    </div>
+    <div  class="ui attached bottom segment">
+
+        <div class="ui relaxed two column divided grid">
+            <form novalidate class="ui form column"
+                  name="metadataForm"
+                  ng-submit="saveMetadata(metadataModel)">
+
+                <h4 class="ui dividing header">Locker Metadata</h4>
+                <div class="ui field">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" autofocus type="text" ng-model="metadataModel.name"/>
+                    <div class="ui teal pointing above ui label"
+                         ng-hide="metadataModel.name">
+                        You should name your locker
+                    </div>
+                </div>
+
+                <div class="ui field">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" type="text" ng-model="metadataModel.description"/>
+                </div>
+
+                <button class="ui fluid button"
+                        ng-class="{disabled: !metadataForm.$dirty}">Save metadata</button>
+            </form>
+            <form class="ui form column">
+                <h4 class="ui dividing header">Share settings</h4>
+                <div class="ui field">
+                    <label for="secret">Secret key</label>
+                    <div class="ui action input">
+                        <input id="secret" type="{{ displaySecret || 'password' }}" disabled ng-model="locker.secret.key"/>
+                        <div class="ui icon button" ng-click="displaySecret=!displaySecret" title="show/hide secret">
+                            <i class="icon" ng-class="{unhide: !displaySecret, hide: displaySecret}"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui field">
+                    <div class="ui toggle checkbox">
+                        <input disabled type="checkbox" name="pet">
+                        <label> Shared with your other devices</label>
+                    </div>
+
+                </div>
+
+                <button class="ui fluid disabled button" disabled >Save share settings</button>
+            </form>
+
+        </div>
+    </div>
+</div>

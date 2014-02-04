@@ -1,24 +1,24 @@
-//FIXME: write controller locker/create.js tests
+//FIXME: write controller locker/content.js tests
 
 'use strict';
 
-xdescribe('Controller: LockerCreateCtrl', function () {
+xdescribe('Controller: LockerGetCtrl', function () {
 
     // load the controller's module
     beforeEach(module('SunnyPass.Webapp'));
 
-    var LockerCreateCtrl,
+    var LockerGetCtrl,
         scope;
 
     // Initialize the controller and a mock scope
     beforeEach(inject(function ($controller, $rootScope) {
         scope = $rootScope.$new();
-        LockerCreateCtrl = $controller('LockerCreateCtrl', {
+        LockerGetCtrl = $controller('LockerGetCtrl', {
             $scope: scope
         });
     }));
 
-    it('should pass', function () {
-//        expect(true).toBeTruthy();
+    it('should attach a list of awesomeThings to the scope', function () {
+        expect(scope.awesomeThings.length).toBe(3);
     });
 });

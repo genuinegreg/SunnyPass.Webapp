@@ -1,0 +1,27 @@
+
+<sp-locker-header add></sp-locker-header>
+
+<!-- Display unlock directive if locker is locked -->
+<sp-locker-unlock ng-show="locked">
+</sp-locker-unlock>
+
+
+<!-- Display add form if locker is unlocked -->
+<div ng-hide="locked">
+
+    <div class="ui attached positive message">
+        <div class="header">
+            Add a new item
+        </div>
+        <p> Fields are not required but you need to save something </p>
+    </div>
+    <sp-locker-item-form class="fluid attached bottom segment"
+                         ng-hide="locked"
+                         sp-locker="locker"
+                         sp-cancel-url="/locker/{{ locker.secret.shared }}"
+                         sp-success-url="/locker/{{ locker.secret.shared }}"
+                         sp-lock-flag="locked">
+
+    </sp-locker-item-form>
+
+</div>

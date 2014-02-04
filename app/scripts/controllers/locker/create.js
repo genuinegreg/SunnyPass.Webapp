@@ -1,23 +1,44 @@
 'use strict';
 
-angular.module('webappApp')
-    .controller('LockerCreateCtrl', function ($scope, $location, Lockers, Keychain) {
+angular.module('SunnyPass.Webapp')
+    .controller('LockerCreateCtrl', function (lockers,$scope, $log, $location, SunnyPass, Crypto) {
+
+
+        $scope.$root.lockers = lockers;
 
         $scope.generate = function() {
-            $scope.secret = Lockers.generateSecret().secret;
+            $scope.key = Crypto.generateKey();
+
         };
 
         $scope.create = function() {
 
-            console.log('Creating a new locker', $scope.secret);
+            if ($scope.form.$invalid) {
+                return;
+            }
 
-            var secret = Lockers.generateSecret($scope.secret);
-            console.log(secret, $scope.password1);
-            Lockers.create(secret);
+            $log.debug('Create locker button pushed', $scope.key, $scope.password1);
 
-            Keychain.saveKey(secret.secret, $scope.password1);
 
-            $location.path('/locker/get/' + secret.shared);
+
+            // create a locker and unlock it
+            SunnyPass.get($scope.key).then(
+                function resolved(locker) {
+                    var unlocked = locker.unlock($scope.password1);
+
+                    unlocked.then(
+                        function resolved() {
+                            $location.path('/locker/get/' + locker.secret.shared);
+                        },
+                        function rejected(err) {
+                            $log.error('$scope.create()... FAILED... unlock rejected', err);
+                            alert('Unknown error ! sorry');
+                        }
+                    );
+                }
+            );
+
+
 
         };
 

@@ -1,19 +1,2 @@
-<header>
-    <h1><a href="/"><i class="glyphicon glyphicon-lock"></i> sunyPass </a></h1>
-</header>
 
-</div>
-<a class="btn btn-success" href="#/locker/create">create</a>
-<button class="btn btn-danger" ng-click="destroy()">destroy</button>
-<button class="btn btn-info" ng-click="generate()">generate</button>
-<input type="text" ng-model="lockerName" text="test" placeholder="you need a name" />
-<button class="btn btn-info" ng-click="refresh()">refresh</button>
-
-
-    <p> secret : <code>{{ secretHex }}</code> </p>
-
-
-<ul class="list-group">
-    <li class="list-group-item" ng-repeat="locker in lockers"><a ng-href="{{ '#/locker/get/' +locker.secret.shared }}">{{ locker.secret.shared }}</a></li>
-</ul>
-
+<h3 class="header">Dashboard</h3>

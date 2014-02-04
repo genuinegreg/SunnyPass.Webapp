@@ -1,0 +1,22 @@
+
+<sp-locker-header content></sp-locker-header>
+
+<!-- Display unlock directive if locker is locked -->
+<sp-locker-unlock ng-show="locked">
+</sp-locker-unlock>
+
+
+<div ng-hide="locked">
+    <div class="ui info attached top message">
+        <div class="header">Edit item</div>
+    </div>
+
+    <sp-locker-item-form class="fluid attached bottom segment"
+                         sp-locker-item="item"
+                         sp-locker="locker"
+                         sp-cancel-url="/locker/{{ locker.secret.shared }}"
+                         sp-success-url="/locker/{{ locker.secret.shared }}"
+                         sp-lock-flag="locked">
+
+    </sp-locker-item-form>
+</div>
