@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: LockerItemCtrl', function () {
+xdescribe('Controller: LockerItemCtrl', function () {
 
     // load the controller's module
     beforeEach(module('sunnyPasswebappApp'));
