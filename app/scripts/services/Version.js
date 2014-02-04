@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('sunnyPasswebappApp')
+angular.module('SunnyPass.Webapp')
     .factory('Version', function VersionFactory() {
         return {
             type: 'alpha',
