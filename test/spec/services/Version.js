@@ -15,20 +15,14 @@ describe('Service: Version', function () {
         expect(!!Version).toBe(true);
     });
 
-    it('should define version', function() {
+    it('should define a semver version number', function() {
         expect(Version.version).toBeDefined();
+        expect(Version.version).toMatch(/\d+\.\d+\.\d+/);
     });
 
     it('should define type to be "stable", "alpha" or "beta"', function() {
         expect(Version.type).toBeDefined();
-
-        var value = ['alpha', 'beta', 'stable'];
-
-        expect(
-            value.some(function(value) {
-                    return value === Version.type;
-                }
-            )).toBeTruthy();
+        expect(Version.type).toMatch(/alpha|beta|stable/);
     });
 
 });
