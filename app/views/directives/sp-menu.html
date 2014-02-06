@@ -14,8 +14,8 @@
         <div class="menu" ng-show="lockers.length > 0">
             <a class="item"
                ng-repeat="locker in lockers"
-               ng-href="#/locker/{{ locker.secret.shared }}"
-               ng-class="{active: $routeParams.sharedSecret === locker.secret.shared}">
+               ui-sref="locker.content({ sharedSecret: locker.secret.shared })"
+               ui-sref-active="active">
 
                 <div class="ui label">
                     <i class="ui alternate icon" ng-class="{lock: locker.isLocked(), unlock: !locker.isLocked()}"></i>
@@ -27,10 +27,10 @@
             </a>
         </div>
     </div>
-    <a class="item" href="#/locker/create">
+    <a class="item" ui-sref="create" ui-sref-active="active">
         <i class="plus icon"></i> Create
     </a>
-    <a class="item" href="#/more">
+    <a class="item" ui-sref="more" ui-sref-active="active">
         <i class="setting icon"></i> More...
     </a>
 </div>

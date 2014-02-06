@@ -5,6 +5,8 @@ angular.module('SunnyPass.Webapp')
 
         $scope.$root.lockers = lockers;
 
+        console.log('enter MainCtrl');
+
 //        $scope.refresh = function() {
 //
 //            var results = [];

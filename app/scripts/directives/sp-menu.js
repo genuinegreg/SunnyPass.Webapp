@@ -3,7 +3,7 @@
 angular.module('SunnyPass.Webapp')
     .directive('spMenu', function () {
         return {
-            templateUrl: 'views/directives/spmenu.html',
+            templateUrl: 'views/directives/sp-menu.html',
             restrict: 'EA',
             controller: function($scope, $rootScope, SunnyPass, Locker) {
                 $scope.refresh = function() {

@@ -4,6 +4,8 @@ angular.module('SunnyPass.Webapp')
     .controller('LockerCreateCtrl', function (lockers,$scope, $log, $location, SunnyPass, Crypto) {
 
 
+        $log.debug('enter LockerCreateCtrl Controller...');
+
         $scope.$root.lockers = lockers;
 
         $scope.generate = function() {

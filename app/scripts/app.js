@@ -7,81 +7,83 @@ angular.module('SunnyPass.Webapp', [
         'ui.router',
         'SunnyPass.Services'
     ])
-    .config(function($logProvider) {
+    .config(function ($logProvider) {
         $logProvider.debugEnabled(true);
     })
-    .config(function ($routeProvider) {
+    .config(function ($stateProvider, $urlRouterProvider) {
 
         var resolve = {
-            locker: function(param) {
-                return ['$route', 'SunnyPass', function($route, SunnyPass) {
-                    return SunnyPass.getBySharedSecret($route.current.params[param]);
+            locker: function () {
+                return ['$stateParams', 'SunnyPass', function ($stateParams, SunnyPass) {
+                    return SunnyPass.getBySharedSecret($stateParams.sharedSecret);
                 }];
             },
-            lockers: function() {
-                return ['SunnyPass', function(SunnyPass) {
+            lockers: function () {
+                return ['SunnPass', function (SunnyPass) {
                     return SunnyPass.list();
                 }];
             }
         };
 
 
-        $routeProvider
-            .when('/', {
+        $urlRouterProvider.otherwise('/');
+
+
+        $stateProvider
+            .state('dashboard', {
+                url: '/',
                 templateUrl: 'views/main.html',
                 controller: 'MainCtrl',
+                abstract: true,
                 resolve: {
                     lockers: resolve.lockers()
                 }
             })
-            .when('/more', {
+            .state('more', {
+                url: '/more',
                 templateUrl: 'views/more.html',
                 controller: 'MoreCtrl',
                 resolve: {
                     lockers: resolve.lockers()
                 }
             })
-            .when('/locker/create', {
+
+            .state('create', {
+                url: '/create',
                 templateUrl: 'views/locker/create.html',
                 controller: 'LockerCreateCtrl',
                 resolve: {
                     lockers: resolve.lockers()
                 }
             })
-            .when('/locker/:sharedSecret', {
+            .state('locker', {
+                url: '/locker/:sharedSecret',
+                controller: 'LockerCtrl',
+                abstract: true,
+                templateUrl: 'views/locker.html',
+                resolve: {
+                    locker: resolve.locker(),
+                    lockers: resolve.lockers()
+                }
+            })
+            .state('locker.content', {
+                url: '/',
                 templateUrl: 'views/locker/content.html',
-                controller: 'LockerContentCtrl',
-                resolve: {
-                    locker: resolve.locker('sharedSecret'),
-                    lockers: resolve.lockers()
-                }
+                controller: 'LockerContentCtrl'
             })
-            .when('/locker/:sharedSecret/add', {
+            .state('locker.add', {
+                url: '/add',
                 templateUrl: 'views/locker/add.html',
-                controller: 'LockerAddCtrl',
-                resolve: {
-                    locker: resolve.locker('sharedSecret'),
-                    lockers: resolve.lockers()
-                }
+                controller: 'LockerAddCtrl'
             })
-            .when('/locker/:sharedSecret/details', {
+            .state('locker.details', {
+                url: '/details',
                 templateUrl: 'views/locker/details.html',
-                controller: 'LockerDetailsCtrl',
-                resolve: {
-                    locker: resolve.locker('sharedSecret'),
-                    lockers: resolve.lockers()
-                }
+                controller: 'LockerDetailsCtrl'
             })
-            .when('/locker/:sharedSecret/item/:itemId', {
+            .state('locker.item', {
+                url: '/:itemId',
                 templateUrl: 'views/locker/item.html',
-                controller: 'LockerItemCtrl',
-                resolve: {
-                    locker: resolve.locker('sharedSecret'),
-                    lockers: resolve.lockers()
-                }
-            })
-            .otherwise({
-                redirectTo: '/'
-            }
-        );
+                controller: 'LockerItemCtrl'
+            });
     });
