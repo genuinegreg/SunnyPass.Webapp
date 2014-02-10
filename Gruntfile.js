@@ -266,6 +266,12 @@ module.exports = function (grunt) {
                     src: ['generated/*']
                 }]
             },
+            semantic: {
+                expand: true,
+                cwd: '<%= yeoman.app %>/bower_components/semantic/build/packaged',
+                dest: '<%= yeoman.dist %>',
+                src: ['fonts/*']
+            },
             styles: {
                 expand: true,
                 cwd: '<%= yeoman.app %>/styles',
@@ -362,6 +368,7 @@ module.exports = function (grunt) {
         'concat',
         'ngmin',
         'copy:dist',
+        'copy:semantic',
         'cdnify',
         'cssmin',
         'uglify',

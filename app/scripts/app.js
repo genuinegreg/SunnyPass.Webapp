@@ -14,14 +14,14 @@ angular.module('SunnyPass.Webapp', [
 
         var resolve = {
             locker: function(param) {
-                return function($route, SunnyPass) {
+                return ['$route', 'SunnyPass', function($route, SunnyPass) {
                     return SunnyPass.getBySharedSecret($route.current.params[param]);
-                };
+                }];
             },
             lockers: function() {
-                return function(SunnyPass) {
+                return ['SunnyPass', function(SunnyPass) {
                     return SunnyPass.list();
-                };
+                }];
             }
         };
 
