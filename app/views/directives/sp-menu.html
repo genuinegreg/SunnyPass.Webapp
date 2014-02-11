@@ -1,36 +1,38 @@
-<div class="ui top attached fluid vertical menu">
+<div class="ui attached fluid vertical menu">
     <div class="header item">
 
         <div class="ui fluid icon input">
             <input type="text"
                    ng-model="$root.searchInput"
-                   placeholder="Search..." >
+                   placeholder="Search...">
             <i class="close link icon" ng-click="clearSearch()" ng-show="$root.searchInput"></i>
             <i class="search icon" ng-hide="$root.searchInput"></i>
         </div>
     </div>
-    <div class="item">
+    <div class="item" ng-class="{ active: $state.includes('root.locker') }">
         <i class="list icon"></i> Lockers
         <div class="menu" ng-show="lockers.length > 0">
             <a class="item"
                ng-repeat="locker in lockers"
-               ui-sref="locker.content({ sharedSecret: locker.secret.shared })"
-               ui-sref-active="active">
+               ui-sref="root.locker.content({ sharedSecret: locker.secret.shared })"
+               ng-class="{ active: isActiveLocker(locker.secret.shared) }">
 
                 <div class="ui label">
-                    <i class="ui alternate icon" ng-class="{lock: locker.isLocked(), unlock: !locker.isLocked()}"></i>
+                    <i class="ui alternate icon"
+                       ng-class="{lock: locker.isLocked(), unlock: !locker.isLocked()}"></i>
                 </div>
                 {{ locker.metadata.name || 'Unnamed Locker' }}
                 <small style="font-family: mono">
-                    [{{ locker.secret.key.substring(0, 4) }}..{{ locker.secret.key.substring(locker.secret.key.length-4, locker.secret.key.length)}}]
+                    [{{ locker.secret.key.substring(0, 4) }}..{{
+                    locker.secret.key.substring(locker.secret.key.length-4, locker.secret.key.length)}}]
                 </small>
             </a>
         </div>
     </div>
-    <a class="item" ui-sref="create" ui-sref-active="active">
+    <a class="item" ui-sref="root.create" ui-sref-active="active">
         <i class="plus icon"></i> Create
     </a>
-    <a class="item" ui-sref="more" ui-sref-active="active">
+    <a class="item" ui-sref="root.more" ui-sref-active="active">
         <i class="setting icon"></i> More...
     </a>
 </div>

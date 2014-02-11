@@ -3,6 +3,8 @@
 </sp-locker-unlock>
 
 
+<ui-view></ui-view>
+
 <!-- Display locker content if locker is unlocked -->
 <div ng-hide="locked">
     <div class="ui attached message" ng-class="{info: list.length <= 0}">
@@ -23,7 +25,7 @@
 
             <!-- item details link-->
             <a class="ui right floated teal mini labeled icon button"
-               ng-href="#/locker/{{ locker.secret.shared }}/item/{{ item._id }}"><i
+               ui-sref="root.locker.content.item({ sharedSecret: locker.secret.shared, itemId: item._id })"><i
                     class="right arrow icon"></i>show</a>
 
             <!-- delete item action -->
@@ -64,13 +66,15 @@
     <!-- Empty locker display -->
     <div class="ui attached bottom segment" ng-hide="list.length > 0">
         <div class="ui buttons">
-            <a class="ui left labeled icon positive button" ng-href="#/locker/{{ locker.secret.shared }}/add">
+            <a class="ui left labeled icon positive button"
+               ui-sref="root.locker.add({ sharedSecret: locker.secret.shared })">
                 <i class="ui plus icon"></i>
                 Add stuff
             </a>
 
             <div class="or"></div>
-            <a class="ui right labeled icon blue button" ng-href="#/locker/{{ locker.secret.shared }}/details">
+            <a class="ui right labeled icon blue button"
+               ui-sref="root.locker.details({ sharedSecret: locker.secret.shared })">
                 <i class="ui setting icon"></i>
                 Configure locker
             </a>
