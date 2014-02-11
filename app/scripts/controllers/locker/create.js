@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('SunnyPass.Webapp')
-    .controller('LockerCreateCtrl', function (lockers,$scope, $log, $location, SunnyPass, Crypto) {
+    .controller('LockerCreateCtrl', function (lockers, $scope, $log, $state, SunnyPass, Crypto) {
 
+
+        $log.debug('enter LockerCreateCtrl Controller...');
 
         $scope.$root.lockers = lockers;
 
@@ -28,11 +30,13 @@ angular.module('SunnyPass.Webapp')
 
                     unlocked.then(
                         function resolved() {
-                            $location.path('/locker/get/' + locker.secret.shared);
+                            $state.go('locker.content', {
+                                sharedSecret: locker.secret.shared
+                            });
                         },
                         function rejected(err) {
                             $log.error('$scope.create()... FAILED... unlock rejected', err);
-                            alert('Unknown error ! sorry');
+                            window.alert('Unknown error ! sorry');
                         }
                     );
                 }

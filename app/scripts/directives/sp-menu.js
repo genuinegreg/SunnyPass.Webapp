@@ -3,9 +3,16 @@
 angular.module('SunnyPass.Webapp')
     .directive('spMenu', function () {
         return {
-            templateUrl: 'views/directives/spmenu.html',
+            templateUrl: 'views/directives/sp-menu.html',
             restrict: 'EA',
-            controller: function($scope, $rootScope, SunnyPass, Locker) {
+            controller: function($scope, $state, $rootScope, SunnyPass, Locker) {
+
+                $scope.isActiveLocker = function(state) {
+                    return state === $state.params.sharedSecret;
+                };
+
+
+                // FIXME: refresh method should be removed
                 $scope.refresh = function() {
                     SunnyPass.list().then(
                         function resolved(lockers) {

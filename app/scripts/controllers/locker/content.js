@@ -7,6 +7,8 @@ angular.module('SunnyPass.Webapp')
         $scope, $log // angular services
         ) {
 
+        $log.debug('enter LockerContentCtrl()');
+
         $scope.$root.lockers = lockers;
         $scope.locker = locker;
         $scope.locked = locker.isLocked();

@@ -8,16 +8,16 @@
             </code>
         </small>
     </div>
-    <a class="item" ng-class="{active: active.content}"
-       ng-href="#/locker/{{ locker.secret.shared }}">
+    <a class="item" ui-sref-active="active"
+       ui-sref="root.locker.content( {sharedSecret : locker.secret.shared })">
         <i class="open folder icon"></i>
     </a>
-    <a class="item" ng-class="{active: active.details}"
-       ng-href="#/locker/{{ locker.secret.shared }}/details">
+    <a class="item" ui-sref-active="active"
+       ui-sref="root.locker.details( { sharedSecret: locker.secret.shared })">
         <i class="setting icon"></i>
     </a>
-    <a class="item" ng-class="{active: active.add}"
-       ng-href="#/locker/{{ locker.secret.shared }}/add">
+    <a class="item" ui-sref-active="active"
+       ui-sref="root.locker.add( {sharedSecret: locker.secret.shared })">
         <i class="icon add"></i>
         <!--New-->
     </a>

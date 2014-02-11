@@ -4,84 +4,86 @@ angular.module('SunnyPass.Webapp', [
         'ngSanitize',
         'ngRoute',
 //        'ngAnimate',
-//        'SunnyPass.Controller',
+        'ui.router',
         'SunnyPass.Services'
     ])
-    .config(function($logProvider) {
+    .config(function ($logProvider) {
         $logProvider.debugEnabled(true);
     })
-    .config(function ($routeProvider) {
+    .config(function ($stateProvider, $urlRouterProvider) {
 
         var resolve = {
-            locker: function(param) {
-                return ['$route', 'SunnyPass', function($route, SunnyPass) {
-                    return SunnyPass.getBySharedSecret($route.current.params[param]);
+            locker: function () {
+                return ['$stateParams', 'SunnyPass', function ($stateParams, SunnyPass) {
+                    return SunnyPass.getBySharedSecret($stateParams.sharedSecret);
                 }];
             },
-            lockers: function() {
-                return ['SunnyPass', function(SunnyPass) {
+            lockers: function () {
+                return ['SunnyPass', function (SunnyPass) {
                     return SunnyPass.list();
                 }];
             }
         };
 
 
-        $routeProvider
-            .when('/', {
+        $urlRouterProvider.otherwise('/');
+
+
+        $stateProvider
+            .state('root', {
+                abstract: true,
+                templateUrl: 'views/root.html',
+                controller: function($scope, $state) {
+                    $scope.$state = $state;
+                },
+                resolve: {
+                    lockers: resolve.lockers()
+                }
+            })
+
+            .state('root.dashboard', {
+                url: '/',
                 templateUrl: 'views/main.html',
-                controller: 'MainCtrl',
-                resolve: {
-                    lockers: resolve.lockers()
-                }
+                controller: 'MainCtrl'
             })
-            .when('/more', {
+            .state('root.more', {
+                url: '/more',
                 templateUrl: 'views/more.html',
-                controller: 'MoreCtrl',
-                resolve: {
-                    lockers: resolve.lockers()
-                }
+                controller: 'MoreCtrl'
             })
-            .when('/locker/create', {
+
+            .state('root.create', {
+                url: '/create',
                 templateUrl: 'views/locker/create.html',
-                controller: 'LockerCreateCtrl',
+                controller: 'LockerCreateCtrl'
+            })
+            .state('root.locker', {
+                url: '/locker/:sharedSecret',
+                controller: 'LockerCtrl',
+                abstract: true,
+                templateUrl: 'views/locker.html',
                 resolve: {
-                    lockers: resolve.lockers()
+                    locker: resolve.locker()
                 }
             })
-            .when('/locker/:sharedSecret', {
+            .state('root.locker.content', {
+                url: '',
                 templateUrl: 'views/locker/content.html',
-                controller: 'LockerContentCtrl',
-                resolve: {
-                    locker: resolve.locker('sharedSecret'),
-                    lockers: resolve.lockers()
-                }
+                controller: 'LockerContentCtrl'
             })
-            .when('/locker/:sharedSecret/add', {
+            .state('root.locker.add', {
+                url: '/add',
                 templateUrl: 'views/locker/add.html',
-                controller: 'LockerAddCtrl',
-                resolve: {
-                    locker: resolve.locker('sharedSecret'),
-                    lockers: resolve.lockers()
-                }
+                controller: 'LockerAddCtrl'
             })
-            .when('/locker/:sharedSecret/details', {
+            .state('root.locker.details', {
+                url: '/details',
                 templateUrl: 'views/locker/details.html',
-                controller: 'LockerDetailsCtrl',
-                resolve: {
-                    locker: resolve.locker('sharedSecret'),
-                    lockers: resolve.lockers()
-                }
+                controller: 'LockerDetailsCtrl'
             })
-            .when('/locker/:sharedSecret/item/:itemId', {
+            .state('root.locker.content.item', {
+                url: '/:itemId',
                 templateUrl: 'views/locker/item.html',
-                controller: 'LockerItemCtrl',
-                resolve: {
-                    locker: resolve.locker('sharedSecret'),
-                    lockers: resolve.lockers()
-                }
-            })
-            .otherwise({
-                redirectTo: '/'
-            }
-        );
+                controller: 'LockerItemCtrl'
+            });
     });

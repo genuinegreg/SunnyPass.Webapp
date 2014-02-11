@@ -4,6 +4,8 @@ angular.module('SunnyPass.Webapp')
     .controller('MoreCtrl', function (lockers, $scope, $log, $q, SunnyPass) {
 
 
+        $log.debug('enter MoreCtrl');
+
         $scope.$root.lockers = lockers;
 
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('SunnyPass.Webapp')
-    .directive('spLockerItemForm', function ($location, $log) {
+    .directive('spLockerItemForm', function ($state, $log) {
         return {
             templateUrl: 'views/directives/sp-locker-item-form.html',
             restrict: 'E',
@@ -35,7 +35,7 @@ angular.module('SunnyPass.Webapp')
                             $scope.saved = true && $scope.spSuccessUrl;
 
                             if ($scope.spSuccessUrl) {
-                                $location.path($scope.spSuccessUrl);
+                                $state.go($scope.spSuccessUrl, $state.params);
                             }
                         },
                         function rejected() {
