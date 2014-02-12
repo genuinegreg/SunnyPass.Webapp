@@ -18,7 +18,7 @@
         <i class="list icon"></i> Lockers
         <div class="menu" ng-show="spLockers.length > 0">
             <a class="item"
-               ng-repeat="locker in spLockers"
+               ng-repeat="locker in spLockers | orderBy:'metadata.name' "
                ui-sref="root.locker.content({ sharedSecret: locker.secret.shared })"
                ng-class="{ active: isActiveLocker(locker.secret.shared) }">
 

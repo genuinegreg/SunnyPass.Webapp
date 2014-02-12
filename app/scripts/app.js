@@ -62,9 +62,17 @@ angular.module('SunnyPass.Webapp', [
             .state('root', {
                 abstract: true,
                 templateUrl: 'views/root.html',
-                controller: function ($scope, $state, lockers) {
+                controller: function ($scope, $state, lockers, SunnyPass) {
                     $scope.lockers = lockers;
                     $scope.$state = $state;
+
+                    $scope.$root.$on('$lockersListChange', function() {
+                        SunnyPass.list().then(
+                            function(list) {
+                                $scope.lockers = list;
+                            }
+                        );
+                    });
                 },
                 resolve: {
                     lockers: resolve.lockers()

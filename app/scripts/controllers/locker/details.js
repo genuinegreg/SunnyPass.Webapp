@@ -28,6 +28,9 @@ angular.module('SunnyPass.Webapp')
 
             $q.all(promises).then(
                 function resolved() {
+                    // notify change in lockers list
+                    $scope.$emit('$lockersListChange');
+
                     locker.loadMetadata().finally($state.reload);
                     $log.debug('saved');
                 },

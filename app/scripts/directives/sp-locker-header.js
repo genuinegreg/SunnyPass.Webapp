@@ -14,10 +14,15 @@ app.directive('spLockerHeader', function () {
             };
 
             $scope.wipe = function() {
-                console.log('wipe !!!');
-                SunnyPass.wipeLocker($scope.locker.secret);
-                $state.reload();
-                $state.go('root.dashboard');
+                SunnyPass.wipeLocker($scope.locker.secret).finally(function() {
+                    // notify change in lockers list
+                    $scope.$emit('$lockersListChange');
+
+                    // and go to dashboard
+                    $state.go('root.dashboard');
+                });
+
+
             };
         },
         link: function postLink(scope, element, attrs) {

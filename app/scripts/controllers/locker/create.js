@@ -26,6 +26,10 @@ angular.module('SunnyPass.Webapp')
 
                     unlocked.then(
                         function resolved() {
+
+                            // notify change in lockers list
+                            $scope.$emit('$lockersListChange');
+
                             $state.go('root.locker.content', {
                                 sharedSecret: locker.secret.shared
                             });
