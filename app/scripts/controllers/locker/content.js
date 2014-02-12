@@ -44,19 +44,24 @@ angular.module('SunnyPass.Webapp')
             $scope.locker.deleteById(item._id).then(function success() {
                 $scope.refreshItems();
             });
+
+            // remove item from display
+            $scope.list.splice(index, 1);
         };
 
-        $scope.copyPassword = function(item) {
+        function copyData(field, item) {
             $scope.locker.unlockData(item).then(function success(data) {
-                window.prompt('Copy to clipboard: Ctrl+C, Enter', data.password);
+                window.prompt('Copy to clipboard: Ctrl+C, Enter', data[field]);
             });
+        }
+
+        $scope.copyPassword = function (item) {
+            copyData('password', item);
         };
-
-        // refresh item list
-        $scope.refreshItems();
-
-
-
-
-
+        $scope.copyLogin = function (item) {
+            copyData('login', item);
+        };
+        $scope.copyNotes = function (item) {
+            copyData('notes', item);
+        };
     });
