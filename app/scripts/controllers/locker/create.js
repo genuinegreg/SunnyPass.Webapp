@@ -26,7 +26,7 @@ angular.module('SunnyPass.Webapp')
 
                     unlocked.then(
                         function resolved() {
-                            $state.go('locker.content', {
+                            $state.go('root.locker.content', {
                                 sharedSecret: locker.secret.shared
                             });
                         },
