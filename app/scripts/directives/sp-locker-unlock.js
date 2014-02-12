@@ -5,26 +5,26 @@ angular.module('SunnyPass.Webapp')
         return {
             templateUrl: 'views/directives/sp-locker-unlock.html',
             restrict: 'EA',
-            controller: function($scope) {
-                $scope.unlock = function(password) {
+            scope: {
+                spLocker: '=',
+                spRedirectToState: '='
+            },
+            controller: function ($scope) {
+                $scope.unlock = function (password) {
+
                     if (!password) {
                         $scope.passwordError = true;
                         return;
                     }
-                    $scope.locker.unlock(password).then(
+                    $scope.spLocker.unlock(password).then(
                         function resolved() {
-                            if ($scope.refreshItems) {
-                                $scope.refreshItems();
-                            }
-                            else {
-                                $scope.locked = $scope.locker.isLocked();
-                            }
+                            $scope.spRedirectToState();
                         },
                         function rejected() {
                             $scope.passwordError = true;
                         }
                     ).
-                        finally(function() {
+                        finally(function () {
                             // clear password field
                             $scope.unlockPassword = undefined;
                         });

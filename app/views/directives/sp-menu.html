@@ -1,4 +1,5 @@
 <div class="ui attached fluid vertical menu">
+
     <div class="header item">
 
         <div class="ui fluid icon input">
@@ -9,11 +10,15 @@
             <i class="search icon" ng-hide="$root.searchInput"></i>
         </div>
     </div>
+    <a class="item" ui-sref="root.dashboard" ui-sref-active="active">
+        <i class="dashboard icon"></i> Dashboard
+    </a>
+
     <div class="item" ng-class="{ active: $state.includes('root.locker') }">
         <i class="list icon"></i> Lockers
-        <div class="menu" ng-show="lockers.length > 0">
+        <div class="menu" ng-show="spLockers.length > 0">
             <a class="item"
-               ng-repeat="locker in lockers"
+               ng-repeat="locker in spLockers"
                ui-sref="root.locker.content({ sharedSecret: locker.secret.shared })"
                ng-class="{ active: isActiveLocker(locker.secret.shared) }">
 

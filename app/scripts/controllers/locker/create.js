@@ -1,26 +1,22 @@
 'use strict';
 
 angular.module('SunnyPass.Webapp')
-    .controller('LockerCreateCtrl', function (lockers, $scope, $log, $state, SunnyPass, Crypto) {
+    .controller('LockerCreateCtrl', function ($scope, $log, $state, SunnyPass, Crypto) {
 
 
         $log.debug('enter LockerCreateCtrl Controller...');
 
-        $scope.$root.lockers = lockers;
-
-        $scope.generate = function() {
+        $scope.generate = function () {
             $scope.key = Crypto.generateKey();
-
         };
 
-        $scope.create = function() {
+        $scope.create = function () {
 
             if ($scope.form.$invalid) {
                 return;
             }
 
             $log.debug('Create locker button pushed', $scope.key, $scope.password1);
-
 
 
             // create a locker and unlock it
@@ -41,7 +37,6 @@ angular.module('SunnyPass.Webapp')
                     );
                 }
             );
-
 
 
         };

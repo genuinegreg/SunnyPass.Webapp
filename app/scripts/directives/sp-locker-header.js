@@ -7,18 +7,10 @@ app.directive('spLockerHeader', function () {
         templateUrl: 'views/directives/sp-locker-header.html',
         restrict: 'E',
         replace: true,
-        controller: function($scope) {
+        controller: function ($scope, $state) {
             $scope.lock = function() {
                 $scope.locker.lock();
-
-                if ($scope.refresh) {
-                    $scope.refresh();
-                }
-                if ($scope.refreshItems) {
-                    $scope.refreshItems();
-                }
-
-                $scope.locked = $scope.locker.isLocked();
+                $state.reload();
             };
         },
         link: function postLink(scope, element, attrs) {

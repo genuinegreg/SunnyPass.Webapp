@@ -1,19 +1,16 @@
 'use strict';
 
 angular.module('SunnyPass.Webapp')
-    .controller('LockerDetailsCtrl', function (
-        lockers, locker, // resolved values
-        Locker,
-        $scope, $q, $log ) {
+    .controller('LockerDetailsCtrl', function (locker, // resolved values
+                                               Locker, $scope, $q, $log, $state) {
 
-        $scope.$root.lockers = lockers;
         $scope.locker = locker;
         $scope.locked = locker.isLocked();
 
         $log.debug('locker metadata', locker.metadata);
         $scope.metadataModel = angular.copy(locker.metadata);
 
-        $scope.saveMetadata = function(meta) {
+        $scope.saveMetadata = function (meta) {
 
 
             var promises = [];
@@ -31,8 +28,7 @@ angular.module('SunnyPass.Webapp')
 
             $q.all(promises).then(
                 function resolved() {
-                    locker.loadMetadata().finally($scope.refresh);
-//                    $scope.refresh();
+                    locker.loadMetadata().finally($state.reload);
                     $log.debug('saved');
                 },
                 function rejected() {

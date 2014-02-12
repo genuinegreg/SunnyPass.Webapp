@@ -5,30 +5,20 @@ angular.module('SunnyPass.Webapp')
         return {
             templateUrl: 'views/directives/sp-menu.html',
             restrict: 'EA',
+            scope: {
+                spLockers: '='
+            },
             controller: function($scope, $state, $rootScope, SunnyPass, Locker) {
+
+                $scope.$state = $state;
 
                 $scope.isActiveLocker = function(state) {
                     return state === $state.params.sharedSecret;
                 };
 
-
-                // FIXME: refresh method should be removed
-                $scope.refresh = function() {
-                    SunnyPass.list().then(
-                        function resolved(lockers) {
-                            $scope.lockers = lockers;
-                        }
-                    );
-                };
-
                 $scope.lockAll = function() {
                     Locker.lockAll();
-                    if ($scope.refresh) {
-                        $scope.refresh();
-                    }
-                    if ($scope.refreshItems) {
-                        $scope.refreshItems();
-                    }
+                    $state.reload();
                 };
 
                 $scope.clearSearch = function() {
