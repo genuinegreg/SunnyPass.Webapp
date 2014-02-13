@@ -7,18 +7,22 @@ app.directive('spLockerHeader', function () {
         templateUrl: 'views/directives/sp-locker-header.html',
         restrict: 'E',
         replace: true,
-        controller: function($scope) {
+        controller: function ($scope, $state, SunnyPass) {
             $scope.lock = function() {
                 $scope.locker.lock();
+                $state.reload();
+            };
 
-                if ($scope.refresh) {
-                    $scope.refresh();
-                }
-                if ($scope.refreshItems) {
-                    $scope.refreshItems();
-                }
+            $scope.wipe = function() {
+                SunnyPass.wipeLocker($scope.locker.secret).finally(function() {
+                    // notify change in lockers list
+                    $scope.$emit('$lockersListChange');
 
-                $scope.locked = $scope.locker.isLocked();
+                    // and go to dashboard
+                    $state.go('root.dashboard');
+                });
+
+
             };
         },
         link: function postLink(scope, element, attrs) {

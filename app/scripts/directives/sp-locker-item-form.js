@@ -1,56 +1,85 @@
 'use strict';
 
 angular.module('SunnyPass.Webapp')
-    .directive('spLockerItemForm', function ($location, $log) {
+    .directive('spLockerItemForm', function ($state, $log, $q) {
         return {
             templateUrl: 'views/directives/sp-locker-item-form.html',
             restrict: 'E',
             scope: {
                 'spLockerItem': '&',
                 'spLocker': '&',
-                'spCancelUrl': '@',
-                'spSuccessUrl': '@',
-                'spLockFlag': '='
+                'spCancelState': '@',
+                'spSuccessState': '@',
+                'spSubmit': '='
             },
             replace: true,
-            controller: function($scope) {
+            controller: function ($scope) {
                 // watch for parent scope item change
-                $scope.$watch('spLockerItem()', function(value) {
+                $scope.$watch('spLockerItem()', function (value) {
                     $log.debug('spLockerItem updated', value);
                     $scope.item = angular.copy(value);
                 });
 
-                // save item
-                $scope.save = function(item) {
+                /**
+                 * Save item with an optional password unlocking the locker
+                 * @param item item to save
+                 * @param [password] locker password
+                 */
+                $scope.unlockAndSave = function (item, password) {
 
+                    $log.debug('unlockAndSave()', item, password);
 
                     $scope.loading = true;
 
-                    $scope.spLocker().save(
-                            angular.copy(item)
-                        ).then(
-                        function resolved(value) {
+                    function save() {
+                        $log.debug('saving...', $scope.spLocker());
+                        return $scope.spLocker().save(item);
+                    }
 
-                            $log.debug('resolved : item saved', value);
-                            $scope.saved = true && $scope.spSuccessUrl;
+                    function unlock() {
+                        if (password) {
+                            $log.debug('unlocking...');
+                            return $scope.spLocker().unlock(password);
+                        }
+                        else {
+                            $log.debug('not unlocking...');
+                            var d = $q.defer();
+                            d.resolve();
+                            return d.promise;
+                        }
+                    }
 
-                            if ($scope.spSuccessUrl) {
-                                $location.path($scope.spSuccessUrl);
-                            }
+                    // unlock and save when resolved
+                    unlock().then(
+                        save,
+                        function unlockRejected() {
+                            // display password error if unlock failed
+                            $scope.unlockPasswordError = true;
+                        }
+                    ).then(
+                        function saveResolved() {
+                            // clear unlock errors
+                            $scope.unlockPasswordError = undefined;
+
+                            // redirect on content state
+                            $state.go('root.locker.content', {sharedSecret: $scope.spLocker().secret.shared});
+
                         },
-                        function rejected() {
-                            window.alert('Unkown error !');
-                        },
-                        function notified() {
-                            $log.warn('notified : locker is locked');
-                            $scope.spLockFlag = true;
-                        }).
-                        finally(function() {
+                        function saveRejected() {
+                            // set locked flag
+                            $scope.locked = true;
+
+                        }
+                    ).finally(
+                        function () {
+                            // finally clear loading state and unlock password
                             $scope.loading = false;
-                            $scope.spLockNotification();
-                        });
-                };
+                            $scope.unlockPassword = undefined;
+                        }
+                    );
 
+
+                };
 
 
             }

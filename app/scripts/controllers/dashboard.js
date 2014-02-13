@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('SunnyPass.Webapp')
-    .controller('MainCtrl', function (lockers, $scope) {
+    .controller('DashboardCtrl', function (lockers, $scope) {
 
         $scope.$root.lockers = lockers;
 

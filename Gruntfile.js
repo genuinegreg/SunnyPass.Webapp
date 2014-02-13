@@ -177,7 +177,7 @@ module.exports = function (grunt) {
 
         // Performs rewrites based on rev and the useminPrepare configuration
         usemin: {
-            html: ['<%= yeoman.dist %>/{,*/}*.html'],
+            html: ['<%= yeoman.dist %>/{,views/**/}*.html'],
             css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
             options: {
                 assetsDirs: ['<%= yeoman.dist %>']
@@ -255,7 +255,7 @@ module.exports = function (grunt) {
                         '.htaccess',
                         '*.html',
                         'views/{,*/}*.html',
-                        'bower_components/**/*',
+//                        'bower_components/**/*',
                         'images/{,*/}*.{webp}',
                         'fonts/*'
                     ]
@@ -265,6 +265,12 @@ module.exports = function (grunt) {
                     dest: '<%= yeoman.dist %>/images',
                     src: ['generated/*']
                 }]
+            },
+            semantic: {
+                expand: true,
+                cwd: '<%= yeoman.app %>/bower_components/semantic/build/packaged',
+                dest: '<%= yeoman.dist %>',
+                src: ['fonts/*', 'images/*']
             },
             styles: {
                 expand: true,
@@ -362,6 +368,7 @@ module.exports = function (grunt) {
         'concat',
         'ngmin',
         'copy:dist',
+        'copy:semantic',
         'cdnify',
         'cssmin',
         'uglify',

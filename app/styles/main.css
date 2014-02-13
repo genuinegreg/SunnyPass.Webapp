@@ -1,6 +1,7 @@
 
 html {
     font-family: sans-serif;
+    min-height: 100.5%;
 }
 
 
@@ -14,10 +15,10 @@ html {
     overflow:hidden;
 }
 
-html {
+/*html {*/
     /* always display scroll bar*/
-    min-height: 100.1%;
-}
+    /**/
+/*}*/
 
 /*.animated-switch {*/
 /*}*/

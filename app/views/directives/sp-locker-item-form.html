@@ -1,7 +1,7 @@
 <form name="form"
       class="ui form"
       ng-class="{loading: loading}"
-      ng-submit="save(item)"
+      ng-submit="unlockAndSave(item, unlockPassword)"
       novalidate>
 
     <div class="ui success message" ng-show="saved">
@@ -15,6 +15,7 @@
                placeholder="Url..."
                name="url" id="url"
                ng-model="item.meta.url"/>
+
         <div class="ui red pointing above ui label"
              ng-show="form.url.$error.url">
             Enter a valid url
@@ -81,4 +82,21 @@
             Cancel
         </a>
     </div>
+
+
+    <div class="ui dimmer" ng-class="{attached: locked, active: locked}">
+        <div class="content">
+            <div class="center">
+                <h2 class="header"> Relock while your where typing </h2>
+
+                <p> Please type in your locker's password </p>
+
+                <div class="ui action input" style="width: 400px; margin-left:-200px; left:50%;">
+                    <input type="password" placeholder="Password" ng-model="unlockPassword">
+                    <button type="submit" class="ui positive button">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </form>

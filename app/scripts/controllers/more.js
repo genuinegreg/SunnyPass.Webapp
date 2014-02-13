@@ -4,7 +4,7 @@ angular.module('SunnyPass.Webapp')
     .controller('MoreCtrl', function (lockers, $scope, $log, $q, SunnyPass) {
 
 
-        $scope.$root.lockers = lockers;
+        $log.debug('enter MoreCtrl');
 
 
         $scope.wipe = function() {
@@ -15,12 +15,8 @@ angular.module('SunnyPass.Webapp')
                     SunnyPass.wipe();
                     $log.debug('MoreCtrl.wipe()');
 
-                    // FIXME: Maybe it's not necessary to check $scope.refresh()
-                    // call refresh to update locker list ui
-                    if ($scope.refresh) {
-                        $log.debug('refresh()');
-                        $scope.refresh();
-                    }
+                    // notify change in lockers list
+                    $scope.$emit('$lockersListChange');
                 });
             $scope.d.promise.finally(
                 function () {
