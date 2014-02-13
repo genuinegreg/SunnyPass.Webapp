@@ -8,7 +8,7 @@ angular.module('SunnyPass.Webapp', [
         'SunnyPass.Services'
     ])
     .config(function($logProvider) {
-        $logProvider.debugEnabled(true);
+        $logProvider.debugEnabled(false);
     })
     .config(function ($routeProvider) {
 
