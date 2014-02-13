@@ -255,7 +255,7 @@ module.exports = function (grunt) {
                         '.htaccess',
                         '*.html',
                         'views/{,*/}*.html',
-                        'bower_components/**/*',
+//                        'bower_components/**/*',
                         'images/{,*/}*.{webp}',
                         'fonts/*'
                     ]
@@ -270,7 +270,7 @@ module.exports = function (grunt) {
                 expand: true,
                 cwd: '<%= yeoman.app %>/bower_components/semantic/build/packaged',
                 dest: '<%= yeoman.dist %>',
-                src: ['fonts/*']
+                src: ['fonts/*', 'images/*']
             },
             styles: {
                 expand: true,
