@@ -15,7 +15,7 @@
     </a>
 
     <div class="item" ng-class="{ active: $state.includes('root.locker') }">
-        <i class="list icon"></i> Lockers
+        <i class="list icon"></i> Safes
         <div class="menu" ng-show="spLockers.length > 0">
             <a class="item"
                ng-repeat="locker in spLockers | orderBy:'metadata.name' "
@@ -26,7 +26,7 @@
                     <i class="ui alternate icon"
                        ng-class="{lock: locker.isLocked(), unlock: !locker.isLocked()}"></i>
                 </div>
-                {{ locker.metadata.name || 'Unnamed Locker' }}
+                {{ locker.metadata.name || 'Unnamed Safe' }}
                 <small style="font-family: mono">
                     [{{ locker.secret.key.substring(0, 4) }}..{{
                     locker.secret.key.substring(locker.secret.key.length-4, locker.secret.key.length)}}]
