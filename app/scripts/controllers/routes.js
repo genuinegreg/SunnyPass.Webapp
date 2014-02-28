@@ -1,10 +1,13 @@
 'use strict';
 
 angular.module('SunnyPass.Webapp')
-    .controller('RoutesCtrl', function ($rootScope, $state) {
+    .controller('RoutesCtrl', function ($rootScope, $state, $log) {
 
 
         $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+
+            // display state change errors
+            $log.debug('$stateChangeError', event, toState, toParams, fromState, fromParams, error);
 
             // going to root.locker.* && locked error => redirect to root.locker.unlock state
             if (toState.name.match(/root\.locker\..*/) && error.message === 'locked') {
