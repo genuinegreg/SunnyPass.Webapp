@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('SunnyPass.Webapp')
-    .controller('MoreCtrl', function (lockers, $scope, $log, $q, SunnyPass) {
+    .controller('MoreCtrl', function (lockers, $scope, $state, $log, $q, SunnyPass) {
 
 
         $log.debug('enter MoreCtrl');
@@ -21,6 +21,8 @@ angular.module('SunnyPass.Webapp')
             $scope.d.promise.finally(
                 function () {
                     $scope.d = undefined;
+                    $state.go('landing');
+
                 }
             );
 
