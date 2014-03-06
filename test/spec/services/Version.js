@@ -11,7 +11,7 @@ describe('Service: Version', function () {
         Version = _Version_;
     }));
 
-    it('should do something', function () {
+    it('should be injected', function () {
         expect(!!Version).toBe(true);
     });
 
