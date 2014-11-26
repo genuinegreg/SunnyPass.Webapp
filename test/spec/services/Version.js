@@ -12,7 +12,7 @@ describe('Service: Version', function () {
     }));
 
     it('should be injected', function () {
-        expect(!!Version).toBe(true);
+        expect(Version).toBeDefined();
     });
 
     it('should define a semver version number', function() {
