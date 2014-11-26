@@ -12,6 +12,7 @@ SunnyPass allow you to keep your password and private notes safe... and one day 
 ## Usage
 
     docker run -d \
+        --restart=on-failure:3 \
         -p 8080 \
         --name sunnypass \
         genuinegreg/sunnypass.webapp
