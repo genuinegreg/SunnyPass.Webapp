@@ -268,7 +268,7 @@ module.exports = function (grunt) {
             },
             semantic: {
                 expand: true,
-                cwd: '<%= yeoman.app %>/bower_components/semantic/build/packaged',
+                cwd: '<%= yeoman.app %>/bower_components/semantic-ui/build/packaged',
                 dest: '<%= yeoman.dist %>',
                 src: ['fonts/*', 'images/*']
             },

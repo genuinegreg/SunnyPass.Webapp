@@ -11,8 +11,8 @@ describe('Service: Version', function () {
         Version = _Version_;
     }));
 
-    it('should do something', function () {
-        expect(!!Version).toBe(true);
+    it('should be injected', function () {
+        expect(Version).toBeDefined();
     });
 
     it('should define a semver version number', function() {

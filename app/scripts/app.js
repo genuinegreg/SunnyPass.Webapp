@@ -59,6 +59,14 @@ angular.module('SunnyPass.Webapp', [
 
 
         $stateProvider
+            .state('landing', {
+                url: '/',
+                templateUrl: 'views/landing.html',
+                controller: 'LandingCtrl',
+                resolve: {
+                    lockers: resolve.lockers()
+                }
+            })
             .state('root', {
                 abstract: true,
                 templateUrl: 'views/root.html',
@@ -66,12 +74,6 @@ angular.module('SunnyPass.Webapp', [
                 resolve: {
                     lockers: resolve.lockers()
                 }
-            })
-
-            .state('root.dashboard', {
-                url: '/',
-                templateUrl: 'views/main.html',
-                controller: 'DashboardCtrl'
             })
             .state('root.more', {
                 url: '/more',

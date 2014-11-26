@@ -2,9 +2,9 @@
 <div ng-hide="locked">
     <div class="ui attached message" ng-class="{info: list.length <= 0}">
         <div class="header">
-            Locker content
+            Safe content
         </div>
-        <p ng-cloak ng-hide="list.length > 0">This locker is empty</p>
+        <p ng-cloak ng-hide="list.length > 0">This Safe is empty</p>
         <!--<p ng-show="locker.metadata.description">{{ locker.metadata.description }}</p>-->
     </div>
     <!-- Locker content -->
@@ -75,7 +75,7 @@
             <a class="ui right labeled icon blue button"
                ui-sref="root.locker.details({ sharedSecret: locker.secret.shared })">
                 <i class="ui setting icon"></i>
-                Configure locker
+                Configure Safe
             </a>
         </div>
     </div>
