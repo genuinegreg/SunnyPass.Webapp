@@ -24,7 +24,7 @@ module.exports = function(config) {
             'app/bower_components/pouchdb/dist/pouchdb-nightly.js',
             'app/bower_components/angular-cache/dist/angular-cache.min.js',
             'app/bower_components/async/lib/async.js',
-            'app/bower_components/SunnyPass.Services/src/*.js',
+            'app/bower_components/SunnyPass.Services/lib/*.js',
             'app/scripts/**/**/*.js',
             'test/mock/**/*.js',
             'test/spec/**/*.js'

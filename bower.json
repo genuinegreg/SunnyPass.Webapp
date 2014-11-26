@@ -9,11 +9,11 @@
     "angular-route": "1.2.11",
     "pouchdb": "~1.1.0",
     "async": "~0.2.5",
-    "semantic": "git@github.com:Semantic-Org/Semantic-UI.git",
+    "semantic-ui": "~0.19.3",
     "angular-animate": "1.2.11",
     "angular-cache": "~2.3.0",
     "crypto-js": "http://crypto-js.googlecode.com/files/CryptoJS%20v3.1.2.zip",
-    "SunnyPass.Services": "git://github.com/genuinegreg/SunnyPass.Service.git#master",
+    "SunnyPass.Services": "https://github.com/genuinegreg/SunnyPass.Services.git#master",
     "angular-ui-router": "0.2.8-bowratic-tedium"
   },
   "devDependencies": {

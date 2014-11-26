@@ -2,15 +2,16 @@
   "name": "SunnyPass.Webapp",
   "version": "0.2.0",
   "dependencies": {
-    "grunt-contrib-copy": "~0.5.0",
-    "grunt-newer": "~0.6.1",
     "grunt-contrib-coffee": "~0.9.0",
-    "grunt-contrib-uglify": "~0.2.7",
-    "grunt-contrib-jshint": "~0.7.2",
-    "grunt-svgmin": "~0.2.1",
-    "load-grunt-tasks": "~0.2.1",
+    "grunt-contrib-connect": "~0.6.0",
+    "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-imagemin": "~0.5.0",
-    "grunt-contrib-connect": "~0.6.0"
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-newer": "~0.6.1",
+    "grunt-svgmin": "~0.2.1",
+    "http-server": "^0.7.3",
+    "load-grunt-tasks": "~0.2.1"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
@@ -56,6 +57,7 @@
     "node": ">=0.8.0"
   },
   "scripts": {
+    "start": "node node_modules/http-server/bin/http-server dist",
     "test": "grunt test"
   }
 }
